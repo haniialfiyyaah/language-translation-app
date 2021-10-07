@@ -86,24 +86,44 @@
 
   <main>
     <div>
-      <h1 class="title"> It Works! </h1>
-      <p class="subtitle">
-        Congratulations, you have just created your first AdonisJS app.
-      </p>
-
-      <ul>
-        <li>
-          The route for this page is defined inside <code>start/routes.ts</code> file
-        </li>
-
-        <li>
-          You can update this page by editing <code>resources/views/welcome.edge</code> file
-        </li>
-
-        <li>
-          If you run into problems, you can reach us on <a href="https://discord.gg/vDcEjq6?">Discord</a> or the <a href="https://forum.adonisjs.com/">Forum</a>.
-        </li>
-      </ul>
+      <h1 class="title"> Translate! </h1>
+      <form action="{{ route('TranslatesController.create') }}" method="POST">
+        <div>
+          <label for="body"> From  </label>
+          <select name="source">
+            @each(lang in langs)
+              <option value={{lang.code}}>{{lang.language}}</option>
+            @end
+          </select>
+        </div>
+        <div>
+          <label for="body"> To  </label>
+          <select name="target">
+            @each(lang in langs)
+              <option value={{lang.code}}>{{lang.language}}</option>
+            @end
+          </select>
+        </div>
+        <div>
+          <p>
+            <label for="body">  </label>
+          </p>
+  
+          <textarea name="text" cols="30" rows="10"></textarea>
+        </div>
+  
+        <div>
+          <button type="submit">Traslate</button>
+        </div>
+      </form>
+      <div>
+        @if(flashMessages.has('translation'))
+          <p>{{ flashMessages.get('translation') }}</p>
+        @endif
+        @if(flashMessages.has('errors'))
+          <p>Errors</p>
+        @endif
+      </div>
     </div>
   </main>
 </body>

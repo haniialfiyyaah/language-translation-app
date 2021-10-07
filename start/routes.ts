@@ -20,9 +20,8 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-// Route.get('/', async ({ view }) => {
-//   return view.render('welcome')
-// })
+Route.get('/', 'TranslatesController.index')
+Route.post('/', 'TranslatesController.create')
 
 Route.post('/translate', 'TranslatesController.store').as('translate')
 Route.get('/lang', 'TranslatesController.lang').as('languages')
